@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link th:href="@{/css/contactsPanel.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li>
+                    <a th:href="@{/cars}" class="nav-link px-2 text-secondary">Каталог </a>
+                </li>
+                <li>
+                <a th:href="@{/serviceentries/add}" class="nav-link px-2 text-white">Запись на сервис </a>
+                </li>
+                <li>
+                <a th:href="@{/servicerating}" class="nav-link px-2 text-white">Отзывы о BestCars.by </a>
+                </li>
+
+                <li>
+                    <a th:href="@{/orders}" class="nav-link px-2 text-white">Заказы </a>
+                </li>
+                <li>
+                    <a th:href="@{/serviceentries}" class="nav-link px-2 text-white">Записи на сервис </a>
+                </li>
+                <li>
+                    <a th:href="@{/testdriveEntries}" class="nav-link px-2 text-white">Записи на тест-драйв </a>
+                </li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" th:method="post" th:action="@{/cars/search}">
+                <input type="search" class="form-control form-control-dark" th:name="searchString" placeholder="Поиск по двигателю">
+            </form>
+        </div>
+    </div>
+
+</header>
+
+
+
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Фильтрация</span>
+    </a>
+    <hr>
+    <form th:method="post" th:action="@{/cars/filter}">
+        <div style="padding-left: 4%; padding-top: 4%">
+            <p>МАРКИ: </p>
+            <tr th:each="car : ${trueCars}">
+                <input type="checkbox" th:name="filters" th:value="${car.getBrand()}" th:checked="${cars.contains(car) && cars!=trueCars}">
+                <label th:text="${car.getBrand()}"></label>
+                <br>
+            </tr>
+            <br>
+            <br>
+            <p>СОРТИРОВКА: </p>
+            <input type="radio" th:name="sortPrice" th:value="'ASC'">
+            <label>По возрастанию цены</label>
+            <br>
+            <input type="radio" th:name="sortPrice" th:value="'DESC'">
+            <label>По убыванию цены</label>
+            <br>
+            <br>
+            <button type="submit" style="height: 30px; width: 200px">Фильтр</button>
+        </div>
+    </form>
+    <hr>
+
+</div>
+
+
+<div class="container">
+
+<tr th:each="car : ${cars}">
+    <p>Идентификатор: <td th:text="${car.id}">1</td></p>
+    <p>Марка: <td th:text="${car.brand}">Brand...</td></p>
+    <p>Модель: <td th:text="${car.model}">Model...</td></p>
+    <p>Год выпуска: <td th:text="${car.year}">Year...</td></p>
+    <p>Двигатель: <td th:text="${car.engine}">Year...</td></p>
+    <p>Цена($): <td th:text="${car.price}">Price ...</td></p>
+
+    <form th:method="get" th:action="@{/cars/{id}(id=${car.getId()})}">
+      <button type="submit" style="height: 30px; width: 200px">Подробнее</button>
+    </form>
+</tr>
+
+</div>
+
+<div id="panel"> <img th:src="@{/images/contactsIcon.png}" alt="Contacts" id="contactsIcon">
+    <div id="hidden_panel">
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <img th:src="@{/images/telegaIcon.png}" style="width:2.6vw;height:2.6vw;" alt="telegram" id="telegaIcon">
+        </a>
+        <br>
+        <a href="https://www.youtube.com/watch?v=lgMi8mhGl_8" target="_blank">
+            <img th:src="@{/images/viberIcon.png}" style="width:2.8vw;height:2.8vw;" alt="viber" id="viberIcon">
+        </a>
+        <br>
+        <a href="https://www.youtube.com/watch?v=zacy2GOu3TI" target="_blank">
+            <img th:src="@{/images/instaIcon.png}"  style="width:2.8vw;height:2.8vw;" alt="instagram" id="instaIcon">
+        </a>
+    </div>
+</div>
+</body>
+</html>

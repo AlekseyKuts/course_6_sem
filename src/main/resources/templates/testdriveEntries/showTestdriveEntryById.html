@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p>Идентификатор: <td th:text="${testdriveEntry.id}">1</td></p>
+<p>Имя: <td th:text="${testdriveEntry.name}">Brand...</td></p>
+<p>Телефон: <td th:text="${testdriveEntry.phone}">Model...</td></p>
+<p>Email: <td th:text="${testdriveEntry.email}">Engine...</td></p>
+<p>ID автомобиля: <td th:text="${testdriveEntry.car.getId()}">Engine...</td></p>
+    <br>
+<br>
+<div>
+    <form th:method="post" th:hidden="${testdriveEntry.getCheckField() == 'LightGreen'} ? 'true' : 'false'" th:action="@{/testdriveEntries/{id}/switchCheckField(id=${testdriveEntry.getId()}, switchValue='LightGreen')}">
+        <button type="submit" style="height: 30px; width: 300px"/>Принять</button>
+    </form>
+    <form th:method="post" th:hidden="${testdriveEntry.getCheckField() == 'Red'} ? 'true' : 'false'" th:action="@{/testdriveEntries/{id}/switchCheckField(id=${testdriveEntry.getId()}, switchValue='Red')}">
+        <button type="submit" style="height: 30px; width: 300px"/>Отклонить</button>
+    </form>
+    <form th:method="post" th:hidden="${testdriveEntry.getCheckField() == 'null'} ? 'true' : 'false'" th:action="@{/testdriveEntries/{id}/switchCheckField(id=${testdriveEntry.getId()}, switchValue='null')}">
+        <button type="submit" style="height: 30px; width: 300px"/>На рассмотрение</button>
+    </form>
+    <form th:method="get" th:action="@{/testdriveEntries/{id}/edit(id=${testdriveEntry.getId()})}">
+        <button type="submit" style="height: 30px; width: 300px"/>Изменить</button>
+    </form>
+    <form th:method="post" th:action="@{/testdriveEntries/{id}/delete(id=${testdriveEntry.getId()})}">
+        <button type="submit" style="height: 30px; width: 300px"/>Удалить</button>
+    </form>
+</div>
+</body>
+</html>

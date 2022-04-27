@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить автомобиль</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div>
+    <form th:method="post" th:action="@{/cars}"  th:object="${car}" onsubmit=alert("Добавлено!")>
+        <input type="text" name="brand" th:field="*{brand}" placeholder="Марка" required>
+        <input type="text" name="model" th:field="*{model}" placeholder="Модель" required>
+        <input type="text" name="engine" th:field="*{engine}" placeholder="Двигатель" required>
+        <input type="number" name="year" th:field="*{year}" max="2100" min="1900" placeholder="Год выпуска" required>
+        <input type="text" name="color" th:field="*{color}" placeholder="Цвет кузова" required>
+        <input type="number" name="horsepower" th:field="*{horsepower}" min="0" max="1000" placeholder="Л. С." required>
+        <input type="number" name="price" th:field="*{price}" min="0" placeholder="Цена" required>
+        <button type="Submit">Добавить</button>
+    </form>
+</div>
+
+
+</body>
+</html>

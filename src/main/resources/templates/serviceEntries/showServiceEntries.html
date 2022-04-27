@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<tr th:each="serviceentry : ${seriveentries}">
+    <p>Идентификатор: <td th:text="${serviceentry.id}">1</td></p>
+    <p>Имя: <td th:text="${serviceentry.name}">Brand...</td></p>
+    <p>Телефон: <td th:text="${serviceentry.phone}">Model...</td></p>
+    <p>Email: <td th:text="${serviceentry.email}">Model...</td></p>
+    <p>Причина обращения: <td th:text="${serviceentry.reason}">Model...</td></p>
+    <p>VIN: <td th:text="${serviceentry.vin}">Model...</td></p>
+    <p>Марка: <td th:text="${serviceentry.brand}">Model...</td></p>
+    <p>Модель: <td th:text="${serviceentry.model}">Model...</td></p>
+    <p>Год выпуска: <td th:text="${serviceentry.year}">Model...</td></p>
+
+</tr>
+
+</body>
+</html>

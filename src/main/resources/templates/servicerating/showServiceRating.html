@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<tr th:each="service : ${services}">
+    <div>
+        <p th:text="${service.getIdPhone()}"></p>
+        <p th:hidden="${service.getRate() == 5} ? 'false' : 'true'" style="color: gold">★★★★★</p>
+        <p th:hidden="${service.getRate() == 4} ? 'false' : 'true'" style="color: gold">★★★★</p>
+        <p th:hidden="${service.getRate() == 3} ? 'false' : 'true'" style="color: gold">★★★</p>
+        <p th:hidden="${service.getRate() == 2} ? 'false' : 'true'" style="color: gold">★★</p>
+        <p th:hidden="${service.getRate() == 1} ? 'false' : 'true'" style="color: gold">★</p>
+    </div>
+</tr>
+</body>
+</html>

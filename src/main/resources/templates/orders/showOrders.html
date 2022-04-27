@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<tr th:each="order : ${orders}">
+    <div th:style="'background-color:' + ${order.checkField}">
+      <p>Идентификатор: <td th:text="${order.id}">1</td></p>
+       <p>Имя: <td th:text="${order.name}">Brand...</td></p>
+      <p>Телефон: <td th:text="${order.phone}">Model...</td></p>
+       <p>Email: <td th:text="${order.email}">Engine...</td></p>
+       <p>ID автомобиля: <td th:text="${order.car.getId()}">Engine...</td></p>
+       <p>Примечание: <td th:text="${order.noteOrder}">Engine...</td></p>
+       <br>
+
+       <form th:method="get" th:action="@{/orders/{id}(id=${order.getId()})}">
+          <button  style="height: 30px; width: 200px">Подробнее</button>
+    </form>
+    </div>
+</tr>
+</body>
+</html>
