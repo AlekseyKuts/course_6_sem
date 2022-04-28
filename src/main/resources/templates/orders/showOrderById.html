@@ -1,34 +1,89 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title >Shop Item - Start Bootstrap Template</title>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/modalWindowCarById.css}" rel="stylesheet">
+    <link th:href="@{/css/commonModalWindow.css}" rel="stylesheet">
+    <link th:href="@{/css/contactsPanel.css}" rel="stylesheet">
+    <link th:href="@{/css/showCarById.css}" rel="stylesheet">
 </head>
 <body>
-<p>Идентификатор: <td th:text="${order.id}">1</td></p>
-<p>Имя: <td th:text="${order.name}">Brand...</td></p>
-<p>Телефон: <td th:text="${order.phone}">Model...</td></p>
-<p>Email: <td th:text="${order.email}">Engine...</td></p>
-<p>ID автомобиля: <td th:text="${order.car.getId()}">Engine...</td></p>
-<p>Примечание: <td th:text="${order.noteOrder}">Engine...</td></p>
-    <br>
-<br>
-<div>
-    <form th:method="post" th:hidden="${order.getCheckField() == 'LightGreen'} ? 'true' : 'false'" th:action="@{/orders/{id}/switchCheckField(id=${order.getId()}, switchValue='LightGreen')}">
-        <button type="submit" style="height: 30px; width: 300px"/>Принять</button>
-    </form>
-    <form th:method="post" th:hidden="${order.getCheckField() == 'Red'} ? 'true' : 'false'" th:action="@{/orders/{id}/switchCheckField(id=${order.getId()}, switchValue='Red')}">
-        <button type="submit" style="height: 30px; width: 300px"/>Отклонить</button>
-    </form>
-    <form th:method="post" th:hidden="${order.getCheckField() == 'null'} ? 'true' : 'false'" th:action="@{/orders/{id}/switchCheckField(id=${order.getId()}, switchValue='null')}">
-        <button type="submit" style="height: 30px; width: 300px"/>На рассмотрение</button>
-    </form>
-    <form th:method="get" th:action="@{/orders/{id}/edit(id=${order.getId()})}">
-        <button type="submit" style="height: 30px; width: 300px"/>Изменить</button>
-    </form>
-    <form th:method="post" th:action="@{/orders/{id}/delete(id=${order.getId()})}">
-        <button type="submit" style="height: 30px; width: 300px"/>Удалить</button>
-    </form>
-</div>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!">BESTCARS.BY</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/cars}">Каталог</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/serviceentries/add}">Запись на сервис</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/servicerating}">Отзывы о BestCars.by </a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Разработка</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/orders}">Заказы</a></li>
+                        <li><a class="dropdown-item" th:href="@{/serviceentries}">Сервис</a></li>
+                        <li><a class="dropdown-item" th:href="@{/testdriveEntries}">Тест-драйв</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" th:href="@{/feedbacks}">Комментарии</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" th:method="post" th:action="@{/cars/search}">
+                <input type="search" class="form-control form-control-dark" th:name="searchString" placeholder="Поиск автомобиля">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!-- Product section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
+
+
+
+                <div class="small mb-1" th:text="'ID: ' + ${order.id}">Идентификатор</div>
+                <h1 class="display-5 fw-bolder" th:text="${order.name}">Имя</h1>
+                <div class="fs-5 mb-5">
+                    <span th:text="${order.phone}">Телефон</span>
+                </div>
+                <p class="lead">Email: <td th:text="${order.email}">Engine...</td></p>
+                <p class="lead" >ID автомобиля: <a th:href="@{/cars/{id}(id=${order.car.getId()})}" th:text="${order.car.getId()}">Year...</a></p>
+                <p class="lead">Примечание: <td th:text="${order.noteOrder}">Horsepower ...</td></p>
+
+                <br>
+                <div class="d-flex">
+                    <form th:method="get" th:action="@{/orders/{id}/edit(id=${order.getId()})}">
+                        <button type="submit" class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px"/>Изменить</button>
+                    </form>
+                </div>
+                <br>
+                <div class="d-flex">
+                    <form th:method="post" th:action="@{/orders/{id}/delete(id=${order.getId()})}">
+                        <button type="submit" class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px"/>Удалить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
 </body>
 </html>

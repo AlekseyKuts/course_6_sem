@@ -11,5 +11,5 @@ public interface ICarService {
     Car findById(Long id);
     void deleteById(Long id);
     void delete(Car car);
-    public List<Car> findByEngineContaining(String engine);
+    public List<Car> findByMarkAndBrandContaining(String engine);
 }

@@ -49,4 +49,10 @@ public class ServiceEntryController {
         return "serviceEntries/addServiceEntry";
     }
 
+    @PostMapping("/serviceentries/{id}/delete")
+    public String deleteById(@PathVariable("id") Long id) {
+        serviceEntryService.deleteById(id);
+        return "redirect:/serviceentries";
+    }
+
 }

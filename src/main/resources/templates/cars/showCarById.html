@@ -1,179 +1,244 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title th:text="${car.brand} + ' ' + ${car.model}">Shop Item - Start Bootstrap Template</title>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <!-- Core theme CSS (includes Bootstrap)-->
     <link th:href="@{/css/modalWindowCarById.css}" rel="stylesheet">
     <link th:href="@{/css/commonModalWindow.css}" rel="stylesheet">
     <link th:href="@{/css/contactsPanel.css}" rel="stylesheet">
-    <style>
-        textarea {
-            width: 20vw; /* Ширина поля в процентах */
-            height: 10vw; /* Высота поля в пикселах */
-            resize: none; /* Запрещаем изменять размер */
-        }
-    </style>
+    <link th:href="@{/css/showCarById.css}" rel="stylesheet">
 </head>
 <body>
-    <p>Идентификатор: <td th:text="${car.id}">1</td></p>
-    <p>Марка: <td th:text="${car.brand}">Brand...</td></p>
-    <p>Модель: <td th:text="${car.model}">Model...</td></p>
-    <p>Двигатель: <td th:text="${car.engine}">Engine...</td></p>
-    <p>Год выпуска: <td th:text="${car.year}">Year...</td></p>
-    <p>Цвет кузова: <td th:text="${car.color}">Color...</td></p>
-    <p>Цена($): <td th:text="${car.price}">Price ...</td></p>
-    <p>Л.С. : <td th:text="${car.horsepower}">Horsepower ...</td></p>
-    <br>
-<br>
-<div>
-    <form th:method="post" th:action="@{/cars/{id}/delete(id=${car.getId()})}">
-        <button type="submit" style="height: 30px; width: 300px"/>Удалить</button>
-    </form>
-    <form th:method="get" th:action="@{/cars/{id}/orders(id=${car.getId()})}">
-        <button type="submit" style="height: 30px; width: 300px"/>Показать заказы</button>
-    </form>
-    <a href="#openOrderModal">
-        <button style="height: 30px; width: 300px"/>Сделать заказ</button>
-    </a>
-    <a href="#openTestdriveEntryModal">
-        <button style="height: 30px; width: 300px"/>Записаться на тест-драйв</button>
-    </a>
-    <a href="#openFeedbackModal">
-    <button style="height: 30px; width: 300px"/>Оставить отзыв</button>
-    </a>
-
-</div>
-
-    <div id="openModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Пожалуйста, оцените наш сервис!</h3>
-                </div>
-                <div class="modal-body">
-
-                        <form th:method="post" th:action="@{/servicerating(idPhone=${param.idPhone})}">
-
-                            <div class="rating_area">
-                                <input onchange="this.form.submit()" type="radio" id="star-5" name="rating" value="5">
-                                <label for="star-5" title="Оценка «5»"></label>
-                                <input onchange="this.form.submit()" type="radio" id="star-4" name="rating" value="4">
-                                <label for="star-4" title="Оценка «4»"></label>
-                                <input onchange="this.form.submit()" type="radio" id="star-3" name="rating" value="3">
-                                <label for="star-3" title="Оценка «3»"></label>
-                                <input onchange="this.form.submit()" type="radio" id="star-2" name="rating" value="2">
-                                <label for="star-2" title="Оценка «2»"></label>
-                                <input onchange="this.form.submit()" type="radio" id="star-1" name="rating" value="1">
-                                <label for="star-1" title="Оценка «1»"></label>
-                            </div>
-
-                        </form>
-
-                </div>
-            </div>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!">BESTCARS.BY</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/cars}">Каталог</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/serviceentries/add}">Запись на сервис</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/servicerating}">Отзывы о BestCars.by </a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Разработка</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/orders}">Заказы</a></li>
+                        <li><a class="dropdown-item" th:href="@{/serviceentries}">Сервис</a></li>
+                        <li><a class="dropdown-item" th:href="@{/testdriveEntries}">Тест-драйв</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" th:href="@{/feedbacks}">Комментарии</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" th:method="post" th:action="@{/cars/search}">
+                <input type="search" class="form-control form-control-dark" th:name="searchString" placeholder="Поиск автомобиля">
+            </form>
         </div>
     </div>
-<div>
+</nav>
 
-    <div id="openFeedbackModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Оставьте ваш отзыв на автомобиль здесь!</h3>
-                    <a href="#close" title="Close" class="close">×</a>
+<!-- Product section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <!-- <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div> -->
+            <div class="col-md-6">
+                <div class="small mb-1" th:text="${car.brand}">Марка</div>
+                <h1 class="display-5 fw-bolder" th:text="${car.model}">Модель</h1>
+                <div class="fs-5 mb-5">
+                    <span th:text="${car.price}+'$'">Цена</span>
                 </div>
-                <div class="modal-body">
-                    <form th:method="post" th:action="@{/cars/{id}/feedbacks(id=${car.getId()})}"  th:object="${feedback}" onsubmit=alert("Отзыв/ составлен/ ,спасибо!")>
-                        <p>Имя*:<input type="text" name="name" th:field="*{name}" placeholder="Имя" required></p>
-                        <p>Отзыв</p><textarea name="feedbackField" th:field="*{feedbackField}" required></textarea><br>
-                        <br><br><button type="Submit">Оставить отзыв</button>
+                <p class="lead">Двигатель: <td th:text="${car.engine}">Engine...</td></p>
+                <p class="lead">Год выпуска: <td th:text="${car.year}">Year...</td></p>
+                <p class="lead">Цвет кузова: <td th:text="${car.color}">Color...</td></p>
+                <p class="lead">Л.С. : <td th:text="${car.horsepower}">Horsepower ...</td></p>
+
+                <div class="d-flex">
+                    <form th:method="post" th:action="@{/cars/{id}/delete(id=${car.getId()})}">
+                        <button type="submit" class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px; background-color: #6c757d" />Удалить</button>
+                    </form>
+                    <form th:method="get" th:action="@{/cars/{id}/edit(id=${car.getId()})}">
+                        <button type="submit" class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px; background-color: #6c757d" />Редактировать</button>
+                    </form>
+                    <form th:method="get" th:action="@{/cars/{id}/orders(id=${car.getId()})}">
+                        <button type="submit" class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px; background-color: #6c757d"/>Показать заказы</button>
                     </form>
                 </div>
+                <hr>
+                <div class="d-flex">
+                    <a href="#openOrderModal">
+                        <button class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px"/><i class="bi-cart-fill me-1"></i>Сделать заказ</button>
+                    </a>
+                    <a href="#openTestdriveEntryModal">
+                        <button class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px"/>Записаться на тест-драйв</button>
+                    </a>
+                    <a href="#openFeedbackModal">
+                        <button class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px"/>Оставить отзыв</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+</section>
+<!-- Related items section-->
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5" style="text-align: center">
+        <h2 class="fw-bolder mb-4" >Отзывы</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
+            <tr th:each="feedbck : ${feedbacks}">
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder" th:text="${feedbck.getName()}">Имя</h5>
+                                <!-- Product price-->
+                                <a th:text="${feedbck.getFeedbackField()}"></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </tr>
+
+        </div>
+    </div>
+</section>
+
+<!-- MODALS-->
+
+<div id="openModal" class="modal1">
+    <div class="modal-dialog1">
+        <div class="modal-content1">
+            <div class="modal-header1">
+                <h3 class="modal-title1">Пожалуйста, оцените наш сервис!</h3>
+            </div>
+            <div class="modal-body1">
+
+                <form th:method="post" th:action="@{/servicerating(idPhone=${param.idPhone})}">
+
+                    <div class="rating_area">
+                        <input onchange="this.form.submit()" type="radio" id="star-5" name="rating" value="5">
+                        <label for="star-5" title="Оценка «5»"></label>
+                        <input onchange="this.form.submit()" type="radio" id="star-4" name="rating" value="4">
+                        <label for="star-4" title="Оценка «4»"></label>
+                        <input onchange="this.form.submit()" type="radio" id="star-3" name="rating" value="3">
+                        <label for="star-3" title="Оценка «3»"></label>
+                        <input onchange="this.form.submit()" type="radio" id="star-2" name="rating" value="2">
+                        <label for="star-2" title="Оценка «2»"></label>
+                        <input onchange="this.form.submit()" type="radio" id="star-1" name="rating" value="1">
+                        <label for="star-1" title="Оценка «1»"></label>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
-    <div>
 
-        <div id="openOrderModal" class="modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Сделать заказ</h3>
-                        <a href="#close" title="Close" class="close">×</a>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <form th:method="post" th:action="@{/cars/{id}/orders(id=${car.getId()})}"  th:object="${order}" onsubmit=alert("Заказ/ составлен/ ,ожидайте/ звонка!")>
-                                <p>Имя*:<input type="text" name="name" th:field="*{name}" placeholder="Имя" required></p><br>
-                                <p>Телефон*:<input type="text" name="phone" th:field="*{phone}" placeholder="XX-XX-XXX" pattern="[0-9]{2}-[0-9]{2}-[0-9]{3}" required></p><br>
-                                <p>Email:<input type="text" name="email" th:field="*{email}" placeholder="Email"></p><br>
-                                <br><br><button type="Submit">Сделать заказ</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </div>
-
-    <div>
-
-        <div id="openTestdriveEntryModal" class="modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Запись на тест-драйв</h3>
-                        <a href="#close" title="Close" class="close">×</a>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <form th:method="post" th:action="@{/cars/{id}/testdriveEntries(id=${car.getId()})}"  th:object="${testdriveEntry}" onsubmit=alert("Заказ/ составлен/ ,ожидайте/ звонка!")>
-                                <p>Имя*:<input type="text" name="name" th:field="*{name}" placeholder="Имя" required></p><br>
-                                <p>Телефон*:<input type="text" name="phone" th:field="*{phone}" placeholder="XX-XX-XXX" pattern="[0-9]{2}-[0-9]{2}-[0-9]{3}" required></p><br>
-                                <p>Email:<input type="text" name="email" th:field="*{email}" placeholder="Email"></p><br>
-                                <br><br><button type="Submit">Записаться на тест-драйв</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
 <div>
-    <br>
-    <br>
-    <form th:method="get" th:action="@{/cars}">
-        <button  style="height: 30px; width: 200px">Назад</button>
-    </form>
-</div>
 
-    <div>
-        <p>ОТЗЫВЫ:</p>
-        <tr th:each="feedbck : ${feedbacks}">
-            <p th:text="${feedbck.getName()}"></p>
-            <p th:text="${feedbck.getFeedbackField()}"></p>
-            <br>
-        </tr>
-    </div>
-
-    <div id="panel"> <img th:src="@{/images/contactsIcon.png}" alt="Contacts" id="contactsIcon">
-        <div id="hidden_panel">
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-            <img th:src="@{/images/telegaIcon.png}" style="width:2.6vw;height:2.6vw;" alt="telegram" id="telegaIcon">
-            </a>
-            <br>
-            <a href="https://www.youtube.com/watch?v=lgMi8mhGl_8" target="_blank">
-            <img th:src="@{/images/viberIcon.png}" style="width:2.8vw;height:2.8vw;" alt="viber" id="viberIcon">
-            </a>
-            <br>
-            <a href="https://www.youtube.com/watch?v=zacy2GOu3TI" target="_blank">
-            <img th:src="@{/images/instaIcon.png}"  style="width:2.8vw;height:2.8vw;" alt="instagram" id="instaIcon">
-            </a>
+    <div id="openFeedbackModal" class="modal1">
+        <div class="modal-dialog1">
+            <div class="modal-content1">
+                <div class="modal-header1">
+                    <h3 class="modal-title1">Оставьте ваш отзыв на автомобиль здесь!</h3>
+                    <a href="#close" title="Close" class="close1">×</a>
+                </div>
+                <div class="modal-body1">
+                    <div>
+                        <form th:method="post" th:action="@{/cars/{id}/feedbacks(id=${car.getId()})}"  th:object="${feedback}" onsubmit=alert("Отзыв/ составлен/ ,спасибо!")>
+                            <label for="name" class="form-label">Имя: </label>
+                            <input type="text" id="name" class="form-control" name="name" th:field="*{name}" placeholder="Имя" required>
+                            <label for="feedbackField" class="form-label">Комментарий: </label>
+                            <textarea name="feedbackField" id="feedbackField" class="form-control" th:field="*{feedbackField}" required></textarea><br>
+                            <br><br><button type="Submit" class="btn btn-primary">Оставить отзыв</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+</div>
+
+
+<div>
+
+    <div id="openOrderModal" class="modal1">
+        <div class="modal-dialog1">
+            <div class="modal-content1">
+                <div class="modal-header1">
+                    <h3 class="modal-title1">Сделать заказ</h3>
+                    <a href="#close" title="Close" class="close1">×</a>
+                </div>
+                <div class="modal-body1">
+                    <div>
+                        <form th:method="post" th:action="@{/cars/{id}/orders(id=${car.getId()})}"  th:object="${order}" onsubmit=alert("Заказ/ составлен/ ,ожидайте/ звонка!")>
+                            <p>Имя*:<input type="text" class="form-control" name="name" th:field="*{name}" placeholder="Имя" required></p><br>
+                            <p>Телефон*:<input type="text" class="form-control" name="phone" th:field="*{phone}" placeholder="XX-XX-XXX" pattern="[0-9]{2}-[0-9]{2}-[0-9]{3}" required></p><br>
+                            <p>Email:<input type="text" class="form-control" name="email" th:field="*{email}" placeholder="Email"></p><br>
+                            <br><br><button type="Submit">Сделать заказ</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div>
+
+    <div id="openTestdriveEntryModal" class="modal1">
+        <div class="modal-dialog1">
+            <div class="modal-content1">
+                <div class="modal-header1">
+                    <h3 class="modal-title1">Запись на тест-драйв</h3>
+                    <a href="#close" title="Close" class="close1">×</a>
+                </div>
+                <div class="modal-body1">
+                    <div>
+                        <form th:method="post" th:action="@{/cars/{id}/testdriveEntries(id=${car.getId()})}"  th:object="${testdriveEntry}" onsubmit=alert("Заказ/ составлен/ ,ожидайте/ звонка!")>
+                            <p>Имя*:<input type="text"  class="form-control" name="name" th:field="*{name}" placeholder="Имя" required></p><br>
+                            <p>Телефон*:<input type="text" class="form-control" name="phone" th:field="*{phone}" placeholder="XX-XX-XXX" pattern="[0-9]{2}-[0-9]{2}-[0-9]{3}" required></p><br>
+                            <p>Email:<input type="text" class="form-control" name="email" th:field="*{email}" placeholder="Email"></p><br>
+                            <br><br><button type="Submit">Записаться на тест-драйв</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Bestcars.by 2022</p></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
 </body>
 </html>

@@ -83,7 +83,7 @@ public class CarsController {
             cars.addAll(trueCars);
         }
         else {
-            cars = carService.findByEngineContaining(searchString);
+            cars = carService.findByMarkAndBrandContaining(searchString);
         }
         if (cars.size() == 0){
             cars.addAll(trueCars);
@@ -97,8 +97,6 @@ public class CarsController {
 
     @GetMapping("/cars/add")
     public String addCar(Model model){
-        //Car car = new Car();
-        //car.setOrders(new ArrayList<Order>());
         model.addAttribute("car", new Car());
         return "cars/addCar";
     }
@@ -112,6 +110,7 @@ public class CarsController {
             model.addAttribute("feedback", new Feedback());
             model.addAttribute("testdriveEntry", new TestdriveEntry());
             model.addAttribute("feedbacks", feedbackService.findByCarId(car.getId()));
+            //return "cars/showCarById";
             return "cars/showCarById";
         }
         else {

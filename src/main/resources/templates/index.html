@@ -29,16 +29,6 @@
                 <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/cars}">Каталог</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/serviceentries/add}">Запись на сервис</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/servicerating}">Отзывы о BestCars.by </a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Разработка</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" th:href="@{/orders}">Заказы</a></li>
-                        <li><a class="dropdown-item" th:href="@{/serviceentries}">Сервис</a></li>
-                        <li><a class="dropdown-item" th:href="@{/testdriveEntries}">Тест-драйв</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" th:href="@{/feedbacks}">Комментарии</a></li>
-                    </ul>
-                </li>
             </ul>
             <form class="d-flex" th:method="post" th:action="@{/cars/search}">
                 <input type="search" class="form-control form-control-dark" th:name="searchString" placeholder="Поиск автомобиля">
@@ -53,34 +43,31 @@
         <h2 class="fw-bolder mb-4" >Заказы</h2>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-            <tr th:each="testdriveEntry : ${testdriveEntries}">
+            <tr th:each="serviceentry : ${seriveentries}">
                 <div >
                     <div class="col mb-5">
                         <div class="card h-100" th:style="'background-color:' + ${testdriveEntry.checkField}">
                             <!-- Product details-->
                             <div class="card-body p-4" >
                                 <div class="text-center" >
+
+
+
+
+
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder" th:text="${testdriveEntry.getName()}">Имя</h5>
+                                    <h5 class="fw-bolder" th:text="${serviceentry.getName()}">Имя</h5>
                                     <!-- Product price-->
-                                    <p>Телефон: <td th:text="${testdriveEntry.phone}">Model...</td></p>
-                                    <p>Email: <td th:text="${testdriveEntry.email}">Engine...</td></p>
-                                    <p>ID автомобиля: <td th:text="${testdriveEntry.car.getId()}">Engine...</td></p>
-                                    <br>
-
-                                    <div class="container d-flex" style="margin-left: 4%">
-                                        <form th:method="post" th:hidden="${testdriveEntry.getCheckField() == 'LightGreen'} ? 'true' : 'false'" th:action="@{/testdriveEntries/{id}/switchCheckField(id=${testdriveEntry.getId()}, switchValue='LightGreen')}">
-                                            <button type="submit" title="Принять" class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px; color: black"/>✔</button>
-                                        </form>
-                                        <form th:method="post" th:hidden="${testdriveEntry.getCheckField() == '#adb5bd'} ? 'true' : 'false'" th:action="@{/testdriveEntries/{id}/switchCheckField(id=${testdriveEntry.getId()}, switchValue='#adb5bd')}">
-                                            <button type="submit" title="Отклонить"  class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px; color: black"/>✖</button>
-                                        </form>
-                                        <form th:method="post" th:hidden="${testdriveEntry.getCheckField() == 'null' || testdriveEntry.getCheckField() == null} ? 'true' : 'false'" th:action="@{/testdriveEntries/{id}/switchCheckField(id=${testdriveEntry.getId()}, switchValue='null')}">
-                                            <button type="submit" title="На рассмотрение" class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px; color: black; font-weight: bold;font-size: 17px; width: 48px;"/>?</button>
-                                        </form>
-                                    </div>
+                                    <p>Телефон: <td th:text="${serviceentry.phone}">Model...</td></p>
+                                    <p>Email: <td th:text="${serviceentry.email}">Engine...</td></p>
+                                    <p>Причина обращения: <td th:text="${serviceentry.reason}">Model...</td></p>
+                                    <p>VIN: <td th:text="${serviceentry.vin}">Model...</td></p>
+                                    <p>Марка: <td th:text="${serviceentry.brand}">Model...</td></p>
+                                    <p>Модель: <td th:text="${serviceentry.model}">Model...</td></p>
+                                    <p>Год выпуска: <td th:text="${serviceentry.year}">Model...</td></p>
 
                                     <br>
+
                                     <form th:method="get" th:action="@{/testdriveEntries/{id}(id=${testdriveEntry.getId()})}">
                                         <button  style="height: 30px; width: 200px">Подробнее</button>
                                     </form>

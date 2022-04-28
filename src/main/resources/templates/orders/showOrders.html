@@ -1,24 +1,114 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title >Shop Item - Start Bootstrap Template</title>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/modalWindowCarById.css}" rel="stylesheet">
+    <link th:href="@{/css/commonModalWindow.css}" rel="stylesheet">
+    <link th:href="@{/css/contactsPanel.css}" rel="stylesheet">
+    <link th:href="@{/css/showCarById.css}" rel="stylesheet">
 </head>
 <body>
-<tr th:each="order : ${orders}">
-    <div th:style="'background-color:' + ${order.checkField}">
-      <p>Идентификатор: <td th:text="${order.id}">1</td></p>
-       <p>Имя: <td th:text="${order.name}">Brand...</td></p>
-      <p>Телефон: <td th:text="${order.phone}">Model...</td></p>
-       <p>Email: <td th:text="${order.email}">Engine...</td></p>
-       <p>ID автомобиля: <td th:text="${order.car.getId()}">Engine...</td></p>
-       <p>Примечание: <td th:text="${order.noteOrder}">Engine...</td></p>
-       <br>
-
-       <form th:method="get" th:action="@{/orders/{id}(id=${order.getId()})}">
-          <button  style="height: 30px; width: 200px">Подробнее</button>
-    </form>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!">BESTCARS.BY</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/cars}">Каталог</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/serviceentries/add}">Запись на сервис</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/servicerating}">Отзывы о BestCars.by </a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Разработка</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/orders}">Заказы</a></li>
+                        <li><a class="dropdown-item" th:href="@{/serviceentries}">Сервис</a></li>
+                        <li><a class="dropdown-item" th:href="@{/testdriveEntries}">Тест-драйв</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" th:href="@{/feedbacks}">Комментарии</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" th:method="post" th:action="@{/cars/search}">
+                <input type="search" class="form-control form-control-dark" th:name="searchString" placeholder="Поиск автомобиля">
+            </form>
+        </div>
     </div>
-</tr>
+</nav>
+
+<!-- Related items section-->
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5" style="text-align: center">
+        <h2 class="fw-bolder mb-4" >Заказы</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+            <tr th:each="order : ${orders}">
+                <div >
+                    <div class="col mb-5">
+                        <div class="card h-100" th:style="'background-color:' + ${order.checkField}">
+                            <!-- Product details-->
+                            <div class="card-body p-4" >
+                                <div class="text-center" >
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder" th:text="${order.getName()}">Имя</h5>
+                                    <!-- Product price-->
+                                    <p>Телефон: <td th:text="${order.phone}">Model...</td></p>
+                                    <p>Email: <td th:text="${order.email}">Engine...</td></p>
+                                    <p>ID автомобиля: <td th:text="${order.car.getId()}">Engine...</td></p>
+                                    <p>Примечание: <td th:text="${order.noteOrder}">Engine...</td></p>
+                                    <br>
+
+                                    <div class="container d-flex" style="margin-left: 4%">
+                                    <form th:method="post" th:hidden="${order.getCheckField() == 'LightGreen'} ? 'true' : 'false'" th:action="@{/orders/{id}/switchCheckField(id=${order.getId()}, switchValue='LightGreen')}">
+                                        <button type="submit" title="Принять" class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px; color: black"/>✔</button>
+                                    </form>
+                                    <form th:method="post" th:hidden="${order.getCheckField() == '#adb5bd'} ? 'true' : 'false'" th:action="@{/orders/{id}/switchCheckField(id=${order.getId()}, switchValue='#adb5bd')}">
+                                        <button type="submit" title="Отклонить"  class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px; color: black"/>✖</button>
+                                    </form>
+                                    <form th:method="post" th:hidden="${order.getCheckField() == 'null' || order.getCheckField() == null} ? 'true' : 'false'" th:action="@{/orders/{id}/switchCheckField(id=${order.getId()}, switchValue='null')}">
+                                        <button type="submit" title="На рассмотрение" class="btn btn-outline-dark flex-shrink-0" style="margin-right: 10px; color: black; font-weight: bold;font-size: 17px; width: 48px;"/>?</button>
+                                    </form>
+                                    </div>
+
+                                    <br>
+                                    <form th:method="get" th:action="@{/orders/{id}(id=${order.getId()})}">
+                                        <button  style="height: 30px; width: 200px">Подробнее</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </tr>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
 </body>
 </html>

@@ -45,12 +45,13 @@ public class CarService implements ICarService{
         repository.delete(car);
     }
 
-    public List<Car> findByEngineContaining(String engine){
+    public List<Car> findByMarkAndBrandContaining(String engine){
         List<Car> trueCars = (List<Car>) repository.findAll();
         engine = engine.toLowerCase(Locale.ROOT);
         List<Car> cars = new ArrayList<Car>();
         for (Car car: trueCars){
-            if (car.getEngine().toLowerCase(Locale.ROOT).contains(engine)) cars.add(car);
+            String str = car.getBrand().toLowerCase(Locale.ROOT) + " " + car.getModel().toLowerCase(Locale.ROOT);
+            if (str.contains(engine)) cars.add(car);
         }
         return cars;
     }
