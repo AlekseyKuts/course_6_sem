@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -50,7 +51,7 @@
 <!-- Related items section-->
 <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5" style="text-align: center">
-        <h2 class="fw-bolder mb-4" >Заказы</h2>
+        <h2 class="fw-bolder mb-4" >Записи на сервис</h2>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
             <tr th:each="serviceentry : ${seriveentries}">
@@ -78,7 +79,7 @@
 
                                     <br>
 
-                                    <form th:method="post" th:action="@{/serviceentries/{id}/delete(id=${serviceentry.getId()})}">
+                                    <form sec:authorize="hasRole('ADMIN')" th:method="post" th:action="@{/serviceentries/{id}/delete(id=${serviceentry.getId()})}">
                                         <button  style="height: 30px; width: 200px">Удалить</button>
                                     </form>
                                 </div>

@@ -9,6 +9,8 @@ import com.bsuir.course.service.IFeedbackService;
 import com.bsuir.course.service.IOrderService;
 import com.bsuir.course.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -100,6 +102,8 @@ public class CarsController {
         model.addAttribute("car", new Car());
         return "cars/addCar";
     }
+
+
 
     @GetMapping("/cars/{id}")
     public String showById(@PathVariable("id") Long id, Model model){

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -82,7 +83,7 @@
                                     </div>
 
                                     <br>
-                                    <form th:method="get" th:action="@{/orders/{id}(id=${order.getId()})}">
+                                    <form sec:authorize="hasRole('ADMIN')" th:method="get" th:action="@{/orders/{id}(id=${order.getId()})}">
                                         <button  style="height: 30px; width: 200px">Подробнее</button>
                                     </form>
                                 </div>
