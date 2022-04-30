@@ -66,7 +66,7 @@
                     <label for="horsepower" class="form-label">Л. С.</label>
                     <input type="number" class="form-control" id="horsepower" name="horsepower" th:field="*{horsepower}" min="0" max="1000" placeholder="Л. С." required>
                     <label for="price" class="form-label">Цена</label>
-                    <input type="number" class="form-control " id="price" name="price" th:field="*{price}" min="0" placeholder="Цена" required><br>
+                    <input type="number" class="form-control " step="0.01" id="price" name="price" th:field="*{price}" min="0" placeholder="Цена" required><br>
                     <button type="Submit" class="btn btn-lg btn-secondary btn-block">Добавить</button>
                 </form>
             </div>

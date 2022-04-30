@@ -4,6 +4,7 @@ import com.bsuir.course.model.Car;
 import com.bsuir.course.model.Feedback;
 import com.bsuir.course.model.Order;
 import com.bsuir.course.model.TestdriveEntry;
+import com.bsuir.course.parsers.FileParser;
 import com.bsuir.course.service.ICarService;
 import com.bsuir.course.service.IFeedbackService;
 import com.bsuir.course.service.IOrderService;
@@ -31,17 +32,22 @@ public class CarsController {
 
     @GetMapping("/cars")
     public String showCars(Model model) {
-
+        FileParser parser = FileParser.getInstance();
+        parser.loadFile("src/main/resources/contacts.properties");
         List<Car> cars = (List<Car>) carService.findAll();
 
         model.addAttribute("trueCars", cars);
         model.addAttribute("cars", cars);
-
+        model.addAttribute("parser", parser);
         return "cars/showCars";
     }
 
     @PostMapping("/cars/filter")
     public String showWithFilter(Model model, @RequestParam(value = "filters", required = false) List<String> filters, @RequestParam(value = "sortPrice", required = false) String sortPrice) {
+        FileParser parser = FileParser.getInstance();
+        parser.loadFile("src/main/resources/contacts.properties");
+        model.addAttribute("parser", parser);
+
         List<Car> trueCars = (List<Car>) carService.findAll();
         List<Car> cars = new ArrayList<Car>();
         if (filters == null || filters.size()==0) {
@@ -74,11 +80,17 @@ public class CarsController {
         model.addAttribute("trueCars", trueCars);
         model.addAttribute("cars", cars);
 
+
         return "cars/showCars";
     }
 
     @PostMapping("/cars/search")
     public String showSearched(Model model, @RequestParam(value = "searchString", required = false) String searchString) {
+        FileParser parser = FileParser.getInstance();
+        parser.loadFile("src/main/resources/contacts.properties");
+        model.addAttribute("parser", parser);
+
+
         List<Car> trueCars = (List<Car>) carService.findAll();
         List<Car> cars = new ArrayList<Car>();
         if (searchString == null || searchString.length()==0) {
@@ -107,6 +119,11 @@ public class CarsController {
 
     @GetMapping("/cars/{id}")
     public String showById(@PathVariable("id") Long id, Model model){
+        FileParser parser = FileParser.getInstance();
+        parser.loadFile("src/main/resources/contacts.properties");
+        model.addAttribute("parser", parser);
+
+
         Car car = carService.findById(id);
         if (car != null) {
             model.addAttribute("car", car);

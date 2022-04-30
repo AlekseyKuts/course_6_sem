@@ -19,15 +19,15 @@
 
 <div id="panel"> <img th:src="@{/images/contactsIcon.png}" alt="Contacts" id="contactsIcon">
     <div id="hidden_panel">
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+        <a th:href="${parser.getValue('telegram')}" target="_blank">
             <img th:src="@{/images/telegaIcon.png}" style="width:39px;height:39px;" alt="telegram" id="telegaIcon">
         </a>
         <br>
-        <a href="https://www.youtube.com/watch?v=lgMi8mhGl_8" target="_blank">
+        <a th:href="${parser.getValue('viber')}" target="_blank">
             <img th:src="@{/images/viberIcon.png}" style="width:40px;height:40px;" alt="viber" id="viberIcon">
         </a>
         <br>
-        <a href="https://www.youtube.com/watch?v=zacy2GOu3TI" target="_blank">
+        <a th:href="${parser.getValue('instagram')}" target="_blank">
             <img th:src="@{/images/instaIcon.png}"  style="width:40px;height:40px;" alt="instagram" id="instaIcon">
         </a>
     </div>

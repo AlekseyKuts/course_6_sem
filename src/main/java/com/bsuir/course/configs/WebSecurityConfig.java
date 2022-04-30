@@ -4,6 +4,7 @@ import com.bsuir.course.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,6 +33,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cars").permitAll()
                 .antMatchers("/cars/filter").permitAll()
                 .antMatchers("/cars/search").permitAll()
+                .antMatchers("/").permitAll()
+                .regexMatchers(HttpMethod.POST, "/cars/(\\d+)/orders\\?").permitAll()
+                .regexMatchers(HttpMethod.POST, "/cars/(\\d+)/orders").permitAll()
+                .regexMatchers(HttpMethod.POST, "/cars/(\\d+)/testdriveEntries\\?").permitAll()
+                .regexMatchers(HttpMethod.POST, "/cars/(\\d+)/testdriveEntries").permitAll()
+                .regexMatchers(HttpMethod.POST, "/cars/(\\d+)/feedbacks\\?").permitAll()
+                .regexMatchers(HttpMethod.POST, "/cars/(\\d+)/feedbacks").permitAll()
+                .antMatchers(HttpMethod.POST, "/serviceentries").permitAll()
                 .regexMatchers("/cars/(\\d+)").permitAll()
                 .regexMatchers("/cars/(\\d+)\\?idPhone=(\\d+)\\-(\\d+)\\-(\\d+)").permitAll()
                 .regexMatchers("/cars/(\\d+)/orders\\?").hasAnyRole("ADMIN", "BOOKER")
