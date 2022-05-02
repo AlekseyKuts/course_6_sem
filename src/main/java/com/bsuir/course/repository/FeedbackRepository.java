@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     List<Feedback> findByCarId(Long id);
+    Feedback findFeedbackByNameAndFeedbackField(String name, String feedbackField);
 }

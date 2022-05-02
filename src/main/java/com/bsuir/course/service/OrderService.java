@@ -49,4 +49,9 @@ public class OrderService implements IOrderService{
     public List<Order> findByCarId(Long id) {
         return repository.findByCarId(id);
     }
+
+    @Override
+    public Order findOrderByNoteOrder(String noteOrder) {
+        return repository.findOrderByNoteOrder(noteOrder);
+    }
 }

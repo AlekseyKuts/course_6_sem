@@ -47,4 +47,9 @@ public class FeedbackService implements IFeedbackService{
     public List<Feedback> findByCarId(Long id) {
         return repository.findByCarId(id);
     }
+
+    @Override
+    public Feedback findFeedbackByNameAndFeedbackField(String name, String feedbackField) {
+        return repository.findFeedbackByNameAndFeedbackField(name, feedbackField);
+    }
 }

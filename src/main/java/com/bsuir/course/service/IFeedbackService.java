@@ -11,4 +11,5 @@ public interface IFeedbackService {
     void deleteById(Long id);
     void delete(Feedback feedback);
     List<Feedback> findByCarId(Long id);
+    Feedback findFeedbackByNameAndFeedbackField(String name, String feedbackField);
 }

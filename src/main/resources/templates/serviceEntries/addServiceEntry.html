@@ -32,8 +32,9 @@
                         <li><a class="dropdown-item" th:href="@{/orders}">Заказы</a></li>
                         <li><a class="dropdown-item" th:href="@{/serviceentries}">Сервис</a></li>
                         <li><a class="dropdown-item" th:href="@{/testdriveEntries}">Тест-драйв</a></li>
-                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" th:href="@{/feedbacks}">Комментарии</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><hr class="dropdown-divider"></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:href="@{/registration}">Регистрация</a></li>
                     </ul>
                 </li>
             </ul>

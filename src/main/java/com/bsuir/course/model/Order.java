@@ -29,4 +29,10 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    public Order(String noteOrder, String checkField, Car car, Customer customer) {
+        this.noteOrder = noteOrder;
+        this.checkField = checkField;
+        this.car = car;
+        this.customer = customer;
+    }
 }

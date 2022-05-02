@@ -17,4 +17,6 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
     Optional<List<Car>> findByEngineContaining(String engine);
 
+    Car findCarByBrandAndModel(String brand, String model);
+
 }

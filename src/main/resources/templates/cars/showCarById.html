@@ -47,14 +47,15 @@
                 <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/cars}">Каталог</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/serviceentries/add}">Запись на сервис</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/servicerating}">Отзывы о BestCars.by </a></li>
-                <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Разработка</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" th:href="@{/orders}">Заказы</a></li>
                         <li><a class="dropdown-item" th:href="@{/serviceentries}">Сервис</a></li>
                         <li><a class="dropdown-item" th:href="@{/testdriveEntries}">Тест-драйв</a></li>
-                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" th:href="@{/feedbacks}">Комментарии</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><hr class="dropdown-divider"></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:href="@{/registration}">Регистрация</a></li>
                     </ul>
                 </li>
             </ul>

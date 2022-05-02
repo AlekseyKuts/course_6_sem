@@ -11,4 +11,5 @@ public interface IOrderService {
     void deleteById(Long id);
     void delete(Order order);
     List<Order> findByCarId(Long id);
+    Order findOrderByNoteOrder(String noteOrder);
 }

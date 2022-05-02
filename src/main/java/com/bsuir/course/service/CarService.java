@@ -56,5 +56,10 @@ public class CarService implements ICarService{
         return cars;
     }
 
+    @Override
+    public Car findCarByBrandAndModel(String brand, String model) {
+         return repository.findCarByBrandAndModel(brand, model);
+    }
+
 
 }
