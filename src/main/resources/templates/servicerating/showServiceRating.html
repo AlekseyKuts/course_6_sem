@@ -65,7 +65,8 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder" th:text="${service.getIdPhone()}">Имя</h5>
+                                <h5 class="fw-bolder" th:text="${service.getCustomer().getName()}">Имя</h5>
+                                <p class="fw-bolder"  th:text="${service.getCustomer().getPhone()}"></p>
                                 <!-- Product price-->
                                 <p th:hidden="${service.getRate() == 5} ? 'false' : 'true'" style="color: gold">★★★★★</p>
                                 <p th:hidden="${service.getRate() == 4} ? 'false' : 'true'" style="color: gold">★★★★</p>

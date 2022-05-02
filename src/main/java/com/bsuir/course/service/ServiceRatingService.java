@@ -43,5 +43,10 @@ public class ServiceRatingService implements IServiceRatingService{
         repository.delete(serviceRating);
     }
 
+    @Override
+    public ServiceRating findServiceRatingByCustomerId(Long customerId) {
+        return repository.findServiceRatingByCustomerId(customerId);
+    }
+
 
 }

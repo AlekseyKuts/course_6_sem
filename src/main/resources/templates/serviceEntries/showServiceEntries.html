@@ -67,10 +67,10 @@
 
 
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder" th:text="${serviceentry.getName()}">Имя</h5>
+                                    <h5 class="fw-bolder" th:text="${serviceentry.getCustomer().getName()}">Имя</h5>
                                     <!-- Product price-->
-                                    <p>Телефон: <td th:text="${serviceentry.phone}">Model...</td></p>
-                                    <p>Email: <td th:text="${serviceentry.email}">Engine...</td></p>
+                                    <p>Телефон: <td th:text="${serviceentry.getCustomer().phone}">Model...</td></p>
+                                    <p>Email: <td th:text="${serviceentry.getCustomer().email}">Engine...</td></p>
                                     <p>Причина обращения: <td th:text="${serviceentry.reason}">Model...</td></p>
                                     <p>VIN: <td th:text="${serviceentry.vin}">Model...</td></p>
                                     <p>Марка: <td th:text="${serviceentry.brand}">Model...</td></p>

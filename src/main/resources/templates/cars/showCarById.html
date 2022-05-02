@@ -145,7 +145,7 @@
             </div>
             <div class="modal-body1">
 
-                <form th:method="post" th:action="@{/servicerating(idPhone=${param.idPhone})}">
+                <form th:method="post" th:action="@{/servicerating(idCustomer=${param.idCustomer})}">
 
                     <div class="rating_area">
                         <input onchange="this.form.submit()" type="radio" id="star-5" name="rating" value="5">
@@ -206,10 +206,10 @@
                 </div>
                 <div class="modal-body1">
                     <div>
-                        <form th:method="post" th:action="@{/cars/{id}/orders(id=${car.getId()})}"  th:object="${order}" onsubmit=alert("Заказ/ составлен/ ,ожидайте/ звонка!")>
-                            <p>Имя*:<input type="text" class="form-control" name="name" th:field="*{name}" placeholder="Имя" required></p><br>
-                            <p>Телефон*:<input type="text" class="form-control" name="phone" th:field="*{phone}" placeholder="XX-XX-XXX" pattern="[0-9]{2}-[0-9]{2}-[0-9]{3}" required></p><br>
-                            <p>Email:<input type="text" class="form-control" name="email" th:field="*{email}" placeholder="Email"></p><br>
+                        <form th:method="post" th:action="@{/cars/{id}/orders(id=${car.getId()})}"   onsubmit=alert("Заказ/ составлен/ ,ожидайте/ звонка!")>
+                            <p>Имя*:<input type="text" class="form-control" name="name" th:field="*{customer.name}" placeholder="Имя" required></p><br>
+                            <p>Телефон*:<input type="text" class="form-control" name="phone" th:field="*{customer.phone}" placeholder="XX-XX-XXX" pattern="[0-9]{2}-[0-9]{2}-[0-9]{3}" required></p><br>
+                            <p>Email:<input type="text" class="form-control" name="email" th:field="*{customer.email}" placeholder="Email"></p><br>
                             <br><br><button type="Submit">Сделать заказ</button>
                         </form>
                     </div>
@@ -231,10 +231,10 @@
                 </div>
                 <div class="modal-body1">
                     <div>
-                        <form th:method="post" th:action="@{/cars/{id}/testdriveEntries(id=${car.getId()})}"  th:object="${testdriveEntry}" onsubmit=alert("Заказ/ составлен/ ,ожидайте/ звонка!")>
-                            <p>Имя*:<input type="text"  class="form-control" name="name" th:field="*{name}" placeholder="Имя" required></p><br>
-                            <p>Телефон*:<input type="text" class="form-control" name="phone" th:field="*{phone}" placeholder="XX-XX-XXX" pattern="[0-9]{2}-[0-9]{2}-[0-9]{3}" required></p><br>
-                            <p>Email:<input type="text" class="form-control" name="email" th:field="*{email}" placeholder="Email"></p><br>
+                        <form th:method="post" th:action="@{/cars/{id}/testdriveEntries(id=${car.getId()})}"   onsubmit=alert("Заказ/ составлен/ ,ожидайте/ звонка!")>
+                            <p>Имя*:<input type="text"  class="form-control" name="name" th:field="*{customer.name}" placeholder="Имя" required></p><br>
+                            <p>Телефон*:<input type="text" class="form-control" name="phone" th:field="*{customer.phone}" placeholder="XX-XX-XXX" pattern="[0-9]{2}-[0-9]{2}-[0-9]{3}" required></p><br>
+                            <p>Email:<input type="text" class="form-control" name="email" th:field="*{customer.email}" placeholder="Email"></p><br>
                             <br><br><button type="Submit">Записаться на тест-драйв</button>
                         </form>
                     </div>

@@ -1,6 +1,8 @@
 package com.bsuir.course.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,25 +10,18 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="servicerating")
 public class ServiceRating {
     @Id
-    private String idPhone;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     private int rate;
 
-    public ServiceRating(int rate) {
-        this.rate = rate;
-    }
 
-    public ServiceRating(String idPhone, int rate) {
-        this.idPhone = idPhone;
-        this.rate = rate;
-    }
-
-    public ServiceRating(){
-
-    }
-
-
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 }

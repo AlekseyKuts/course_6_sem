@@ -11,4 +11,5 @@ public interface IServiceRatingService {
     ServiceRating findById(String id);
     void deleteById(String id);
     void delete(ServiceRating serviceRating);
+    ServiceRating findServiceRatingByCustomerId(Long customerId);
 }

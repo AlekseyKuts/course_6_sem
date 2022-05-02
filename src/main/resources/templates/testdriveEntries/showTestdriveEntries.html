@@ -50,7 +50,7 @@
 <!-- Related items section-->
 <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5" style="text-align: center">
-        <h2 class="fw-bolder mb-4" >Заказы</h2>
+        <h2 class="fw-bolder mb-4" >Записи на тест-драйв</h2>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
             <tr th:each="testdriveEntry : ${testdriveEntries}">
@@ -61,11 +61,11 @@
                             <div class="card-body p-4" >
                                 <div class="text-center" >
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder" th:text="${testdriveEntry.getName()}">Имя</h5>
+                                    <h5 class="fw-bolder" th:text="${testdriveEntry.getCustomer().getName()}">Имя</h5>
                                     <!-- Product price-->
-                                    <p>Телефон: <td th:text="${testdriveEntry.phone}">Model...</td></p>
-                                    <p>Email: <td th:text="${testdriveEntry.email}">Engine...</td></p>
-                                    <p>ID автомобиля: <td th:text="${testdriveEntry.car.getId()}">Engine...</td></p>
+                                    <p>Телефон: <td th:text="${testdriveEntry.getCustomer().phone}">Model...</td></p>
+                                    <p>Email: <td th:text="${testdriveEntry.getCustomer().email}">Engine...</td></p>
+                                    <p>ID автомобиля: <td th:href="@{/cars/{id}(id=${testdriveEntry.car.getId()})}" th:text="${testdriveEntry.car.getId()}">Engine...</td></p>
                                     <br>
 
                                     <div class="container d-flex" style="margin-left: 4%">

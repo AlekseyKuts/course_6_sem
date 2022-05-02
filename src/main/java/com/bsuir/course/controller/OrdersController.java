@@ -1,8 +1,10 @@
 package com.bsuir.course.controller;
 
 import com.bsuir.course.model.Car;
+import com.bsuir.course.model.Customer;
 import com.bsuir.course.model.Order;
 import com.bsuir.course.service.ICarService;
+import com.bsuir.course.service.ICustomerService;
 import com.bsuir.course.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ public class OrdersController {
     private ICarService carService;
     @Autowired
     private IOrderService orderService;
+    @Autowired
+    private ICustomerService customerService;
 
     @GetMapping("/cars/{id}/orders")
     public String getOrdersByCarId(@PathVariable("id") Long id, Model model){
@@ -43,11 +47,18 @@ public class OrdersController {
     }
 
     @PostMapping("/cars/{id}/orders")
-    public String addOrder(@PathVariable("id") Long id, @ModelAttribute("order") Order order, Model model){
+    public String addOrder(@PathVariable("id") Long id, @ModelAttribute("order") Order order, @ModelAttribute("customer") Customer customer, Model model){
         Car car = carService.findById(id);
         order.setCar(car);
+        Customer nCustomer = customerService.findCustomerByNameAndPhone(customer.getName(), customer.getPhone());
+        if (nCustomer==null) nCustomer = new Customer();
+        nCustomer.setName(customer.getName());
+        nCustomer.setPhone(customer.getPhone());
+        nCustomer.setEmail(customer.getEmail());
+        customerService.save(nCustomer);
+        order.setCustomer(nCustomer);
         orderService.save(order);
-        return "redirect:/cars/" + id + "?idPhone=" + order.getPhone() + "#openModal";
+        return "redirect:/cars/" + id + "?idCustomer=" + nCustomer.getId() + "#openModal";
 
     }
 
@@ -72,12 +83,25 @@ public class OrdersController {
     public String updateOrder(Model model, @PathVariable("id") Long id){
         Order order = orderService.findById(id);
         model.addAttribute("order", order);
+        model.addAttribute("customer", order.getCustomer());
         return "orders/updateOrder";
     }
 
     @PostMapping("/orders/{id}")
-    public String update(@ModelAttribute("order") Order order, @PathVariable("id") Long id){
+    public String update(@ModelAttribute("order") Order order, @ModelAttribute("customer") Customer customer, @PathVariable("id") Long id){
         order.setCar(orderService.findById(id).getCar());
+        Customer nCustomer = customerService.findCustomerByNameAndPhone(customer.getName(), customer.getPhone());
+        if (nCustomer==null) nCustomer = new Customer();
+        nCustomer.setName(customer.getName());
+
+        System.out.println(customer.getName());
+        System.out.println(nCustomer.getName());
+
+        nCustomer.setPhone(customer.getPhone());
+        nCustomer.setEmail(customer.getEmail());
+
+        customerService.save(nCustomer);
+        order.setCustomer(nCustomer);
         orderService.save(order);
         return "redirect:/orders";
     }

@@ -62,10 +62,10 @@
                             <div class="card-body p-4" >
                                 <div class="text-center" >
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder" th:text="${order.getName()}">Имя</h5>
+                                    <h5 class="fw-bolder" th:text="${order.getCustomer().getName()}">Имя</h5>
                                     <!-- Product price-->
-                                    <p>Телефон: <td th:text="${order.phone}">Model...</td></p>
-                                    <p>Email: <td th:text="${order.email}">Engine...</td></p>
+                                    <p>Телефон: <td th:text="${order.getCustomer().getPhone()}">Model...</td></p>
+                                    <p>Email: <td th:text="${order.getCustomer().getEmail()}">Engine...</td></p>
                                     <p>ID автомобиля: <td th:text="${order.car.getId()}">Engine...</td></p>
                                     <p>Примечание: <td th:text="${order.noteOrder}">Engine...</td></p>
                                     <br>

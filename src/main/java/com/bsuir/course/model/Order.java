@@ -1,12 +1,16 @@
 package com.bsuir.course.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Table(name="carorder")
 public class Order {
@@ -14,9 +18,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
-    private String phone;
-    private String email;
     private String noteOrder;
     private String checkField;
 
@@ -24,17 +25,8 @@ public class Order {
     @JoinColumn(name = "carId")
     private Car car;
 
-    public Order(String name, String phone, String email, Car car, String noteOrder) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.car = car;
-        this.noteOrder = noteOrder;
-    }
-
-    public Order(){
-
-    }
-
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
 }

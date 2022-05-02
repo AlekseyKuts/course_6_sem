@@ -1,9 +1,6 @@
 package com.bsuir.course.controller;
 
-import com.bsuir.course.model.Car;
-import com.bsuir.course.model.Feedback;
-import com.bsuir.course.model.Order;
-import com.bsuir.course.model.TestdriveEntry;
+import com.bsuir.course.model.*;
 import com.bsuir.course.parsers.FileParser;
 import com.bsuir.course.service.ICarService;
 import com.bsuir.course.service.IFeedbackService;
@@ -127,6 +124,7 @@ public class CarsController {
         Car car = carService.findById(id);
         if (car != null) {
             model.addAttribute("car", car);
+            model.addAttribute("customer", new Customer());
             model.addAttribute("order", new Order());
             model.addAttribute("feedback", new Feedback());
             model.addAttribute("testdriveEntry", new TestdriveEntry());

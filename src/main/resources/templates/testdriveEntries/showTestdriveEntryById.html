@@ -56,11 +56,11 @@
 
 
                 <div class="small mb-1" th:text="'ID: ' + ${testdriveEntry.id}">Идентификатор</div>
-                <h1 class="display-5 fw-bolder" th:text="${testdriveEntry.name}">Имя</h1>
+                <h1 class="display-5 fw-bolder" th:text="${testdriveEntry.getCustomer().name}">Имя</h1>
                 <div class="fs-5 mb-5">
-                    <span th:text="${testdriveEntry.phone}">Телефон</span>
+                    <span th:text="${testdriveEntry.getCustomer().phone}">Телефон</span>
                 </div>
-                <p class="lead">Email: <td th:text="${testdriveEntry.email}">Engine...</td></p>
+                <p class="lead">Email: <td th:text="${testdriveEntry.getCustomer().email}">Engine...</td></p>
                 <p class="lead" >ID автомобиля: <a th:href="@{/cars/{id}(id=${testdriveEntry.car.getId()})}" th:text="${testdriveEntry.car.getId()}">Year...</a></p>
 
                 <br>

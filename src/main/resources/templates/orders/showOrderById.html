@@ -56,11 +56,11 @@
 
 
                 <div class="small mb-1" th:text="'ID: ' + ${order.id}">Идентификатор</div>
-                <h1 class="display-5 fw-bolder" th:text="${order.name}">Имя</h1>
+                <h1 class="display-5 fw-bolder" th:text="${order.getCustomer().name}">Имя</h1>
                 <div class="fs-5 mb-5">
-                    <span th:text="${order.phone}">Телефон</span>
+                    <span th:text="${order.getCustomer().phone}">Телефон</span>
                 </div>
-                <p class="lead">Email: <td th:text="${order.email}">Engine...</td></p>
+                <p class="lead">Email: <td th:text="${order.getCustomer().email}">Engine...</td></p>
                 <p class="lead" >ID автомобиля: <a th:href="@{/cars/{id}(id=${order.car.getId()})}" th:text="${order.car.getId()}">Year...</a></p>
                 <p class="lead">Примечание: <td th:text="${order.noteOrder}">Horsepower ...</td></p>
 
