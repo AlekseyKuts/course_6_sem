@@ -12,8 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping
@@ -43,6 +42,22 @@ public class OrdersController {
     public String getOrders(Model model){
         List<Order> orders = orderService.findAll();
         model.addAttribute("orders", orders);
+
+        List<List<Object>> chartData = new ArrayList<List<Object>>();
+        Map<String, Integer> map = new HashMap<>();
+
+        for (Order order : orders){
+            if (map.get(order.getCar().getBrand()) == null) map.put(order.getCar().getBrand(), 1);
+            else map.put(order.getCar().getBrand(), map.get(order.getCar().getBrand()) + 1);
+        }
+
+        Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            chartData.add(List.of(pair.getKey(), pair.getValue()));
+        }
+
+        model.addAttribute("chartData", chartData);
         return "orders/showOrders";
     }
 

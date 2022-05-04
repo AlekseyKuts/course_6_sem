@@ -37,6 +37,11 @@ public class MainController {
         return "loginPage";
     }
 
+    @GetMapping("/map")
+    public String getMap() {
+        return "map";
+    }
+
     @GetMapping("/registration")
     public String registration(Model model) { return "registrationPage"; }
 
